@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var testRouter = require("./routes/test");
+var signRouter = require("./routes/sign");
 
 var db = require("./db/db");
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/", signRouter);
 app.use("/test", testRouter);
 
 // Synchronizing all models at once

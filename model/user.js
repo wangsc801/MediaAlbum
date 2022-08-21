@@ -12,19 +12,31 @@ User.init(
       autoIncrement: 1,
     },
     username: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(64),
       allowNull: 0,
     },
-    password: {
+    nickname: {
       type: DataTypes.STRING(64),
+      allowNull: 1,
+    },
+    password: {
+      type: DataTypes.STRING(32),
+      allowNull: 0,
+    },
+    password_salt: {
+      type: DataTypes.STRING(24),
       allowNull: 0,
     },
     phone: {
       type: DataTypes.CHAR(11),
       allowNull: 1,
     },
+    email: {
+      type: DataTypes.STRING(64),
+      allowNull: 1,
+    },
     gender: {
-      type: DataTypes.CHAR(2),
+      type: DataTypes.CHAR(1),
       defaultVlue: "0",
     },
   },

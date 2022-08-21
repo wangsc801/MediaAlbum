@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+
+<form action="/signup" method="post">
+  <span>username</span>
+  <input type="text" name="username" id="username" />
+  <span id="isUsernameExistsHint"></span>
+  <br />
+  <span>nickname</span>
+  <input type="text" name="nickname" id="" />
+  <br />
+  <span>email</span>
+  <input type="text" name="email" id="" />
+  <br />
+  <span>password</span>
+  <input type="password" name="password" id="" />
+  <br />
+  <input type="submit" value="sign up" />
+</form>
+
+<script type="text/javascript">
+  let req=new XMLHttpRequest(); 
+  let username=document.getElementById("username");
+  username.addEventListener("blur",(e)=>{
+  req.open("get","/signup/isUsernameExists?username="+username.value);
+  req.send(); 
+  req.onreadystatechange = ()=>{
+    let hint = document.getElementById("isUsernameExistsHint");
+      if(req.readyState==4){
+        hint.innerText=req.responseText;
+      }
+    } 
+  });
+</script>
