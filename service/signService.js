@@ -1,5 +1,6 @@
 var User = require("../model/user");
 var md5 = require("js-md5");
+const db = require("../db/db");
 
 function generateRandomStr(length) {
   let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -33,9 +34,22 @@ async function signup(user) {
   });
 }
 
+async function signin(identity, password) {
+  let result = await db.sequelize.query(
+    "select password,password_salt from user where username='" + identity + "'",
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  let inputedMd5Password = md5(password + result[0].password_salt);
+  if (inputedMd5Password == result[0].password) {
+    return true;
+  }
+  return false;
+}
+
 const signService = {};
 signService.signup = signup;
 signService.generateRandomStr = generateRandomStr;
 signService.findByUsername = findByUsername;
+signService.signin = signin;
 
 module.exports = signService;

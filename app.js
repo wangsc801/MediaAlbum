@@ -7,6 +7,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var testRouter = require("./routes/test");
 var signRouter = require("./routes/sign");
+var albumRouter = require("./routes/album");
 
 var db = require("./db/db");
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/", signRouter);
 app.use("/test", testRouter);
+app.use("/album", albumRouter);
 
 // Synchronizing all models at once
 db.syncAllModels();

@@ -24,7 +24,7 @@ User.init(
       allowNull: 0,
     },
     password_salt: {
-      type: DataTypes.STRING(24),
+      type: DataTypes.STRING(26),
       allowNull: 0,
     },
     phone: {

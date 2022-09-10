@@ -1,8 +1,8 @@
 var express = require("express");
-
 var signService = require("../service/signService");
 
 var router = express.Router();
+
 router.get("/signup", function (req, res, next) {
   res.render("sign/signup", { title: "Sign Up" });
 });
@@ -32,6 +32,24 @@ router.post("/signup", (req, res) => {
   };
   signService.signup(user);
   res.render("index", { title: "signup test done." });
+});
+
+router.get("/signin", (req, res) => {
+  res.render("sign/signin", { title: "sign in" });
+});
+
+router.post("/signin", (req, res) => {
+  let signinFields = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+  let isSigninSuccess = signService.signin(
+    signinFields.username,
+    signinFields.password
+  );
+  if (isSigninSuccess) {
+    res.render("album", { title: "album" });
+  }
 });
 
 module.exports = router;

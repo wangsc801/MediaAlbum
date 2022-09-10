@@ -16,6 +16,7 @@ const sequelizeInstance = new Sequelize(
       acquire: dbConfig.pool.acquire,
       idle: dbConfig.pool.idle,
     },
+    sync: { force: 0 },
   }
 );
 
